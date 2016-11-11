@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+            {% javascripts
+                '@QueueBundle/Resources/public/js/lib/jquery-3.1.1.min.js'
+                '@QueueBundle/Resources/public/js/queue.js'
+                '@QueueBundle/Resources/public/js/form.js'
+            %}
+                <script src="{{ asset_url }}" type="text/javascript"></script>
+            {% endjavascripts %}
+            {% stylesheets filter='less' output='css/compiled-main.css'
+            '@QueueBundle/Resources/public/less/queue.less'
+            %}
+                <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="all" />
+            {% endstylesheets %}
+        {% endblock %}
+    </head>
+    <body>
+    <div id="main">
+        {% block body %}
+        <div id="title">
+            {% block title %}
+                <h1> Demo Queue Application </h1>
+            {% endblock %}
+        </div>
+        <div id="form_wrapper" class="wrapper">
+            <div id="form_control">
+                <h2>New Customer</h2>
+                <p>Please select a customer type</p>
+                {% for key,form in forms %}
+                    <div class="button_link">
+                        <ul>
+                            <li><a href="#" class="{{ key }}">{{ key | capitalize }}</a></li>
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+            {% for key,form in forms %}
+                <div class="customer_form">
+                    {{ form_start(form) }}
+                    {{ form_widget(form, {'attr': {'class': 'hidden dynamic'}}) }}
+                    {{ form_end(form) }}
+                </div>
+            {% endfor %}
+        </div>
+        <div id="list_wrapper" class="wrapper">
+            <h2>Current Queue</h2>
+            <table id="list_table">
+                <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Service</th>
+                    <th>Queued at</th>
+                </tr>
+            </table>
+        </div>
+         <div id="footer">
+             {% block footer %}
+
+             {% endblock %}
+         </div>
+        {% endblock %}
+    </div>
+    </body>
+</html>

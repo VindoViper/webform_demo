@@ -1,0 +1,4 @@
+queue:
+    resource: "@QueueBundle/Controller/"
+    type:     annotation
+    prefix:   /

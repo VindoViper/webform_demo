@@ -1,0 +1,21 @@
+parameters:
+  queue.service.options:
+    'housing':
+      - 'Housing'
+    'benefits':
+      - 'Benefits'
+    'councilTax':
+      - 'Council Tax'
+    'flyTipping':
+      - 'Fly Tipping'
+    'missedBin':
+      - 'Missed Bin'
+
+services:
+
+    queue.entry_repository:
+      class: QueueBundle\Entity\Repository\QueueEntryRepository
+      factory: ['@doctrine.orm.entity_manager', 'getRepository']
+      arguments:
+        - 'QueueBundle\Entity\QueueEntry'
+
